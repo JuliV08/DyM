@@ -1,0 +1,54 @@
+# --- Python básico ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+.env/
+ENV/
+.env.bak
+.env.local
+
+# Archivos de base de datos locales
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos de Django que no queremos versionar
+/static/
+/staticfiles/
+/media/
+/media_root/
+/public/static/
+/public/media/
+
+# Archivos de configuración local
+settings_local.py
+local_settings.py
+
+# Logs
+logs/
+*.log
+
+# Archivos de compilación / cache
+*.pot
+*.py[co]
+*.mo
+
+# Herramientas de pruebas y coverage
+.coverage
+.coverage.*
+htmlcov/
+pytest_cache/
+.tox/
+
+# VSCode / PyCharm / otros IDEs
+.vscode/
+.idea/
+*.code-workspace
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
