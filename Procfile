@@ -1,0 +1,1 @@
+web: gunicorn dym_project.wsgi
