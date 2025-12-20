@@ -1,1 +1,1 @@
-web: gunicorn dym_project.wsgi
+web: python manage.py migrate && gunicorn dym_project.wsgi
