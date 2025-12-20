@@ -135,10 +135,10 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Bienvenido al Sistema de Gestión",
 
     # Copyright al pie de página
-    "copyright": "Tu Nombre Dev",
+    "copyright": "villeju",
 
     # El buscador general (apretando Ctrl+F busca en todos los modelos)
-    "search_model": ["auth.User", "tudjangoapp.Producto"], # <--- Cambiá esto por tu modelo de productos
+    "search_model": ["auth.User", "catalogo.Producto", "catalogo.Marca", "catalogo.CategoriaProducto", "catalogo.ImagenProducto", "catalogo.SiteConfig"], # <--- Cambiá esto por tu modelo de productos
 
     # Menú lateral
     "topmenu_links": [
