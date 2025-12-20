@@ -1,4 +1,4 @@
-import dj_database_url
+#import dj_database_url
 import os
 from pathlib import Path
 
@@ -65,11 +65,10 @@ WSGI_APPLICATION = 'dym_project.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': dj_database_url.config(
-        # Si Railway nos da una DATABASE_URL, la usa. Si no, usa SQLite local.
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Password validation
