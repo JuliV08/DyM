@@ -8,13 +8,13 @@ class ImagenProductoInline(admin.TabularInline):
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'marca', 'mostrar_imagen', 'es_destacado', 'orden')
-    list_filter = ('marca', 'categorias', 'es_destacado')
+    list_display = ('nombre', 'marca', 'mostrar_imagen', 'es_destacado', 'tiene_stock', 'orden')
+    list_filter = ('marca', 'categorias', 'es_destacado', 'tiene_stock')
     search_fields = ('nombre', 'descripcion_corta', 'marca__nombre')
     prepopulated_fields = {'slug': ('nombre',)}
     inlines = [ImagenProductoInline]
     filter_horizontal = ('categorias',)
-    list_editable = ('es_destacado', 'orden')
+    list_editable = ('es_destacado', 'tiene_stock', 'orden')
     ordering = ('orden', 'nombre')
 
     def mostrar_imagen(self, obj):

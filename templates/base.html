@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="overflow-x-hidden">
 
 <head>
     <meta charset="UTF-8">
@@ -58,20 +58,26 @@
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+<body class="flex flex-col min-h-screen bg-gray-50 text-gray-800 overflow-x-hidden">
 
     <!-- Header Premium -->
     <header class="sticky top-0 z-50 bg-gradient-to-r from-white via-pink-50/80 to-white backdrop-blur-md border-b border-pink-100/50 shadow-sm">
         <div class="container mx-auto px-4 py-2 flex justify-between items-center">
             <!-- Logo -->
-            <a href="{% url 'catalogo:home' %}" class="flex items-center gap-2 group">
+            <a href="{% url 'catalogo:home' %}" class="flex items-center gap-3 group">
                 {% if site_config.logo_sitio %}
-                <img src="{{ site_config.logo_sitio.url }}" alt="DyM Logo" class="max-h-20 w-auto transition-transform duration-300 group-hover:scale-105">
+                <img src="{{ site_config.logo_sitio.url }}" alt="DyM Logo" class="h-16 md:h-20 w-auto max-w-[140px] md:max-w-[180px] object-contain object-left transition-transform duration-300 group-hover:scale-105">
                 {% else %}
                 <!-- Placeholder Logo -->
                 <div class="h-12 px-4 flex items-center bg-gradient-to-r from-dym-accent to-pink-400 rounded-lg">
                     <span class="text-white font-serif font-bold text-2xl">DyM</span>
                 </div>
+                {% endif %}
+                {% if site_config.logo_sitio_2 %}
+                <!-- Divider -->
+                <div class="h-10 w-px bg-gradient-to-b from-transparent via-pink-300 to-transparent"></div>
+                <!-- Second Logo -->
+                <img src="{{ site_config.logo_sitio_2.url }}" alt="Partner Logo" class="h-16 md:h-20 w-auto max-w-[140px] md:max-w-[180px] object-contain object-left transition-transform duration-300 group-hover:scale-105">
                 {% endif %}
             </a>
 
@@ -130,7 +136,11 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-gradient-to-b from-pink-50 to-white border-t border-pink-100 p-4 flex flex-col gap-2 text-center">
             <a href="{% url 'catalogo:home' %}" class="block py-3 px-4 rounded-xl hover:bg-pink-100 text-gray-700 font-medium transition-all duration-300">Inicio</a>
-            <a href="{% url 'catalogo:producto_list' %}" class="block py-3 px-4 rounded-xl hover:bg-pink-100 text-gray-700 font-medium transition-all duration-300">Productos</a>
+            <a href="{% url 'catalogo:producto_list' %}" class="relative mx-4 py-3 px-4 bg-gradient-to-r from-dym-accent to-pink-400 text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:shadow-pink-200 transition-all duration-300 group overflow-hidden flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                <span class="relative z-10">Productos</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-pink-400 to-dym-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
             <a href="{% url 'catalogo:marca_list' %}" class="block py-3 px-4 rounded-xl hover:bg-pink-100 text-gray-700 font-medium transition-all duration-300">Marcas</a>
             <a href="{% url 'catalogo:nosotros' %}" class="block py-3 px-4 rounded-xl hover:bg-pink-100 text-gray-700 font-medium transition-all duration-300">Nosotros</a>
         </div>

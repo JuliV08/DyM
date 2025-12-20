@@ -14,9 +14,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://adjunctly-unemitted-braiden.ngrok-free.dev', 
+]
+
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,3 +117,42 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    # Título en la pestaña del navegador
+    "site_title": "Panel Cosméticos",
+
+    # Título en la pantalla de login
+    "site_header": "Gestión de Productos",
+
+    # Título en la barra superior (adentro)
+    "site_brand": "Panel Admin",
+
+    # Logo (si tenés uno, poné la ruta en static, sino dejalo comentado)
+    # "site_logo": "img/logo.png",
+
+    # Mensaje de bienvenida en el login
+    "welcome_sign": "Bienvenido al Sistema de Gestión",
+
+    # Copyright al pie de página
+    "copyright": "Tu Nombre Dev",
+
+    # El buscador general (apretando Ctrl+F busca en todos los modelos)
+    "search_model": ["auth.User", "tudjangoapp.Producto"], # <--- Cambiá esto por tu modelo de productos
+
+    # Menú lateral
+    "topmenu_links": [
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Ver Sitio Web", "url": "/", "new_window": True}, # Link directo a la web
+    ],
+
+    # Opciones de interfaz
+    "show_ui_builder": True, # <--- ESTO ES MÁGICO (te deja editar colores en vivo)
+}
+
+# --- CONFIGURACIÓN DE STATIC FILES ---
+# Carpeta donde collectstatic guardará todos los archivos estáticos
+STATIC_ROOT = BASE_DIR / "staticfiles_build" 
+
+# La URL desde donde Django sirve tus archivos estáticos (lo que ya tenés)
+# STATIC_URL = 'static/' # (Si ya la tenés, no la toques)

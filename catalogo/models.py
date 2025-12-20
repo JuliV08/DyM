@@ -11,7 +11,8 @@ class SiteConfig(models.Model):
     email_contacto = models.EmailField(blank=True, null=True)
     direccion = models.CharField(max_length=255, blank=True, null=True)
     horarios = models.TextField(blank=True, null=True, help_text="Ej: Lunes a Viernes de 9 a 18hs")
-    logo_sitio = models.ImageField(upload_to='site/', blank=True, null=True)
+    logo_sitio = models.ImageField(upload_to='site/', blank=True, null=True, verbose_name="Logo Principal")
+    logo_sitio_2 = models.ImageField(upload_to='site/', blank=True, null=True, verbose_name="Logo Secundario", help_text="Logo de cuenta asociada (se mostrará al lado del principal)")
     
     # Custom colors if needed
     primary_color = models.CharField(max_length=7, default='#000000', help_text="Hex code (ej: #FF00FF)")
@@ -68,6 +69,7 @@ class Producto(models.Model):
     descripcion_larga = models.TextField(blank=True)
     imagen_principal = models.ImageField(upload_to='productos/')
     es_destacado = models.BooleanField(default=False)
+    tiene_stock = models.BooleanField(default=True, verbose_name="Tiene Stock", help_text="Desmarcar si el producto está sin stock")
     orden = models.IntegerField(default=0)
     
     # External Links

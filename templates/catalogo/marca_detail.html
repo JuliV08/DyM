@@ -48,13 +48,13 @@
                         </div>
                         {% endif %}
                         <!-- Hover Overlay -->
-                        <div
+                        <a href="{% url 'catalogo:producto_detail' producto.slug %}"
                             class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end justify-center pb-6">
                             <span
                                 class="bg-white/95 backdrop-blur-sm text-dym-dark px-5 py-2.5 rounded-full font-bold text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition duration-300">
-                                Ver Producto ✨
+                                Ver Detalles
                             </span>
-                        </div>
+                        </a>
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
                         <h3

@@ -53,6 +53,37 @@
         box-shadow: 0 6px 25px rgba(216, 167, 177, 0.6);
     }
 
+    /* Special style for "Todas" button - more subtle */
+    .filter-btn-all {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        margin: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        border-radius: 9999px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid #D8A7B1;
+        background: white;
+        color: #D8A7B1;
+    }
+
+    .filter-btn-all:hover {
+        background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+        color: #880e4f;
+        border-color: #f06292;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(216, 167, 177, 0.4);
+    }
+
+    .filter-btn-all.active {
+        border-color: #D8A7B1;
+        background: linear-gradient(135deg, #fff5f7 0%, #fce4ec 100%);
+        color: #c2185b;
+        box-shadow: 0 2px 10px rgba(216, 167, 177, 0.3);
+    }
+
     .filter-section {
         animation: slideIn 0.4s ease-out;
     }
@@ -73,6 +104,40 @@
         display: flex;
         flex-wrap: wrap;
         gap: 0.25rem;
+    }
+
+    /* Scrollable filter container with custom scrollbar */
+    .filter-scroll {
+        max-height: 220px;
+        overflow-y: auto;
+        padding-right: 8px;
+        margin-right: -4px;
+    }
+
+    /* Custom Scrollbar - Webkit (Chrome, Safari, Edge) */
+    .filter-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .filter-scroll::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 10px;
+    }
+
+    .filter-scroll::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #D8A7B1 0%, #f06292 100%);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .filter-scroll::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #f06292 0%, #D8A7B1 100%);
+    }
+
+    /* Custom Scrollbar - Firefox */
+    .filter-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: #D8A7B1 transparent;
     }
 
     .clear-filters-btn {
@@ -118,15 +183,27 @@
     }
 </style>
 
-<div class="bg-gray-100 py-8">
-    <div class="container mx-auto px-4">
-        <h1 class="text-3xl font-serif font-bold text-gray-800 mb-6 animate-fade-in-up">Catálogo de Productos</h1>
+<!-- Premium Catalog Section -->
+<section class="py-12 bg-gradient-to-b from-white via-pink-50/30 to-white relative overflow-hidden min-h-screen">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 left-0 w-72 h-72 bg-pink-100 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute top-1/4 right-0 w-96 h-96 bg-pink-100 rounded-full filter blur-3xl opacity-20 translate-x-1/2"></div>
+    <div class="absolute bottom-1/4 left-0 w-80 h-80 bg-dym-accent/10 rounded-full filter blur-3xl opacity-30 -translate-x-1/4"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+        <!-- Premium Header -->
+        <div class="text-center mb-12 animate-fade-in-up">
+            <span class="text-dym-accent font-semibold text-sm uppercase tracking-widest">Explora nuestra colección</span>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mt-2 pb-1 leading-tight bg-gradient-to-r from-gray-800 via-dym-accent to-pink-400 bg-clip-text text-transparent">Catálogo de Productos</h1>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Descubrí nuestra selección de productos profesionales para el cuidado de tu cabello</p>
+        </div>
 
         <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Sidebar Filters -->
+            <!-- Sidebar Filters Premium -->
             <aside class="w-full lg:w-1/4 animate-fade-in-up" style="animation-delay: 0.1s;">
-                <div class="bg-white p-6 rounded-lg shadow-sm sticky top-24">
-                    <h3 class="font-bold text-lg mb-4 border-b pb-2">Filtrar por</h3>
+                <div class="rounded-2xl p-[2px] bg-gradient-to-br from-transparent via-pink-100 to-transparent sticky top-24">
+                    <div class="bg-white/95 backdrop-blur-xl p-6 rounded-2xl shadow-lg">
+                        <h3 class="font-bold text-lg mb-4 pb-3 border-b border-pink-100 bg-gradient-to-r from-gray-800 via-dym-accent to-pink-400 bg-clip-text text-transparent">Filtrar por</h3>
 
                     <form action="." method="get" id="filter-form">
                         <!-- Search -->
@@ -145,7 +222,7 @@
                                 <span class="w-2 h-2 rounded-full bg-gradient-to-r from-pink-400 to-pink-300"></span>
                                 Marcas
                             </h4>
-                            <div class="filter-container max-h-48 overflow-y-auto pr-1">
+                            <div class="filter-container filter-scroll">
                                 {% if not current_marca %}
                                 <label class="filter-btn active">
                                     <input type="radio" name="marca" value="" class="filter-radio" checked onchange="this.form.submit()">
@@ -183,7 +260,7 @@
                                 <span class="w-2 h-2 rounded-full bg-gradient-to-r from-pink-400 to-pink-300"></span>
                                 Categorías
                             </h4>
-                            <div class="filter-container">
+                            <div class="filter-container filter-scroll">
                                 {% if not current_categoria %}
                                 <label class="filter-btn active">
                                     <input type="radio" name="categoria" value="" class="filter-radio" checked onchange="this.form.submit()">
@@ -224,42 +301,43 @@
                         </div>
                         {% endif %}
                     </form>
+                    </div>
                 </div>
             </aside>
 
-            <!-- Product Grid -->
+            <!-- Product Grid Premium -->
             <div class="w-full lg:w-3/4 animate-fade-in-up" style="animation-delay: 0.2s;">
                 {% if page_obj %}
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {% for producto in page_obj %}
-                    <!-- Gradient Border Wrapper -->
-                    <div
-                        class="rounded-lg p-[1px] bg-gradient-to-br from-dym-accent to-pink-200 hover:from-pink-400 hover:to-dym-accent transition-all duration-500 shadow-sm hover:shadow-lg group">
-                        <div class="bg-white rounded-lg h-full flex flex-col overflow-hidden">
-                            <div class="relative aspect-square overflow-hidden bg-gray-50">
+                    <!-- Premium Product Card -->
+                    <div class="rounded-2xl p-[2px] bg-gradient-to-br from-dym-accent via-pink-300 to-pink-200 hover:from-pink-400 hover:via-dym-accent hover:to-pink-300 transition-all duration-500 shadow-lg hover:shadow-2xl group hover:-translate-y-3">
+                        <div class="bg-white rounded-2xl h-full flex flex-col overflow-hidden">
+                            <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                                 {% if producto.imagen_principal %}
-                                <img src="{{ producto.imagen_principal.url }}" alt="{{ producto.nombre }}"
-                                    class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                                <img src="{{ producto.imagen_principal.url }}" alt="{{ producto.nombre }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out">
                                 {% else %}
-                                <div class="w-full h-full flex items-center justify-center text-gray-400">Sin Imagen
+                                <div class="w-full h-full flex items-center justify-center text-gray-300">
+                                    <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                                 </div>
                                 {% endif %}
-                                <!-- Quick View Overlay -->
-                                <div
-                                    class="absolute inset-0 bg-black bg-opacity-10 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                                    <span
-                                        class="bg-white text-dym-dark px-4 py-2 rounded-full font-bold text-sm shadow-lg transform scale-90 group-hover:scale-100 transition">Ver
-                                        Detalle</span>
+                                <!-- Sin Stock Badge -->
+                                {% if not producto.tiene_stock %}
+                                <div class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg z-10">
+                                    Sin Stock
                                 </div>
+                                {% endif %}
+                                <!-- Premium Quick View Overlay -->
+                                <a href="{% url 'catalogo:producto_detail' producto.slug %}" class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end justify-center pb-6">
+                                    <span class="bg-white/95 backdrop-blur-sm text-dym-dark px-5 py-2.5 rounded-full font-bold text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition duration-300">Ver Detalles</span>
+                                </a>
                             </div>
-                            <div class="p-4 flex-grow flex flex-col">
-                                <p class="text-xs text-dym-accent font-bold uppercase mb-1">{{ producto.marca.nombre }}
-                                </p>
-                                <h3 class="font-bold text-gray-800 mb-2">{{ producto.nombre }}</h3>
+                            <div class="p-5 flex-grow flex flex-col">
+                                <p class="text-xs text-dym-accent font-bold uppercase tracking-wider mb-1">{{ producto.marca.nombre }}</p>
+                                <h3 class="font-bold text-lg text-gray-800 mb-2 group-hover:text-dym-accent transition-colors duration-300">{{ producto.nombre }}</h3>
                                 <div class="mt-auto pt-4">
-                                    <a href="{% url 'catalogo:producto_detail' producto.slug %}"
-                                        class="block w-full text-center border border-dym-dark text-dym-dark py-2 rounded hover:bg-dym-dark hover:text-white transition text-sm font-medium">
-                                        Ver Detalle
+                                    <a href="{% url 'catalogo:producto_detail' producto.slug %}" class="block w-full text-center bg-gradient-to-r from-gray-800 to-gray-700 text-white py-3 rounded-xl hover:from-dym-accent hover:to-pink-400 transition-all duration-300 text-sm font-semibold shadow-sm hover:shadow-md">
+                                        Ver Producto
                                     </a>
                                 </div>
                             </div>
@@ -268,30 +346,42 @@
                     {% endfor %}
                 </div>
 
-                <!-- Pagination -->
-                <div class="mt-8 flex justify-center gap-2">
+                <!-- Premium Pagination -->
+                <div class="mt-12 flex justify-center items-center gap-4">
                     {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}{% if current_marca %}&marca={{ current_marca }}{% endif %}{% if current_categoria %}&categoria={{ current_categoria }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}"
-                        class="px-3 py-1 border rounded hover:bg-gray-100">Anterior</a>
+                    <a href="?page={{ page_obj.previous_page_number }}{% if current_marca %}&marca={{ current_marca }}{% endif %}{% if current_categoria %}&categoria={{ current_categoria }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}" class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-pink-200 rounded-xl text-gray-700 font-medium hover:border-dym-accent hover:text-dym-accent hover:shadow-md transition-all duration-300">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        Anterior
+                    </a>
                     {% endif %}
 
-                    <span class="px-3 py-1">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                    <span class="px-6 py-3 bg-gradient-to-r from-dym-accent to-pink-400 text-white rounded-xl font-semibold shadow-lg">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
 
                     {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}{% if current_marca %}&marca={{ current_marca }}{% endif %}{% if current_categoria %}&categoria={{ current_categoria }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}"
-                        class="px-3 py-1 border rounded hover:bg-gray-100">Siguiente</a>
+                    <a href="?page={{ page_obj.next_page_number }}{% if current_marca %}&marca={{ current_marca }}{% endif %}{% if current_categoria %}&categoria={{ current_categoria }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}" class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-pink-200 rounded-xl text-gray-700 font-medium hover:border-dym-accent hover:text-dym-accent hover:shadow-md transition-all duration-300">
+                        Siguiente
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
                     {% endif %}
                 </div>
 
                 {% else %}
-                <div class="text-center py-20 bg-white rounded-lg shadow-sm">
-                    <p class="text-gray-500 text-lg">No se encontraron productos con esos filtros.</p>
-                    <a href="{% url 'catalogo:producto_list' %}" class="text-dym-accent font-bold mt-2 inline-block">Ver
-                        todo el catálogo</a>
+                <!-- Premium Empty State -->
+                <div class="text-center py-20 rounded-2xl p-[2px] bg-gradient-to-br from-transparent via-pink-100 to-transparent">
+                    <div class="bg-white/95 backdrop-blur-xl rounded-2xl py-16 px-8">
+                        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-dym-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <p class="text-gray-500 text-lg mb-4">No se encontraron productos con esos filtros.</p>
+                        <a href="{% url 'catalogo:producto_list' %}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-dym-accent to-pink-400 text-white rounded-xl font-semibold hover:from-pink-400 hover:to-dym-accent hover:scale-105 transition-all duration-300 shadow-lg">
+                            Ver todo el catálogo
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
                 </div>
                 {% endif %}
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}
