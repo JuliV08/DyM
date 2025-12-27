@@ -1,4 +1,4 @@
-#import dj_database_url
+import dj_database_url
 import os
 from pathlib import Path
 
@@ -63,12 +63,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dym_project.wsgi.application'
 
-# Database
+# Database - PostgreSQL
+# En Railway: DATABASE_URL se configura automáticamente
+# En local: usamos la conexión local por defecto
+DATABASE_URL = os.environ.get('DATABASE_URL', 
+    'postgres://postgres:manteca123@localhost:5432/dym_cosmeticos')
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(DATABASE_URL)
 }
 
 # Password validation
